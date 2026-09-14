@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WebPixtel — AI, Shopify, WordPress, Unity &amp; Ads</title>
+  <meta name="description" content="WebPixtel — Lahore agency for AI automation &amp; SaaS, Shopify, WordPress, Unity 2D/3D, Google Ads, and product configurators. Lead: Ali Raza Hassan." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --bg2: #12141a;
+      --ink: #f4f1ea;
+      --muted: #9a958c;
+      --line: rgba(244, 241, 234, 0.1);
+      --accent: #e8954a;
+      --accent2: #f0b56e;
+      --ok: #8fce6a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Manrope, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    a { color: var(--accent); }
+    img { max-width: 100%; display: block; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+
+    /* atmosphere — amber, not purple */
+    .glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(900px 500px at 85% 15%, rgba(232, 149, 74, 0.14), transparent 55%),
+        radial-gradient(700px 400px at 10% 80%, rgba(143, 206, 106, 0.06), transparent 50%);
+    }
+    .page { position: relative; z-index: 1; }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 0;
+      gap: 16px;
+    }
+    .logo {
+      font-family: Syne, sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.04em;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .logo span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .nav-links a { color: var(--muted); text-decoration: none; }
+    .nav-links a:hover { color: var(--ink); }
+    .hire {
+      display: inline-flex;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(232,149,74,0.95), rgba(232,149,74,0.35));
+      color: #1a1208 !important;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    /* Hero — one composition */
+    .hero {
+      min-height: calc(100svh - 80px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px 0 72px;
+      animation: rise 0.9s ease-out both;
+    }
+    .status {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin: 0 0 18px;
+    }
+    .status::before {
+      content: "";
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--ok);
+      margin-right: 10px;
+      box-shadow: 0 0 0 3px rgba(143, 206, 106, 0.2);
+      vertical-align: 1px;
+    }
+    h1 {
+      font-family: Syne, sans-serif;
+      font-weight: 800;
+      font-size: clamp(48px, 9vw, 92px);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      margin: 0 0 14px;
+    }
+    .role {
+      margin: 0 0 16px;
+      font-size: clamp(16px, 2.4vw, 22px);
+      color: rgba(244,241,234,0.78);
+      font-weight: 500;
+    }
+    .lead {
+      margin: 0;
+      max-width: 36em;
+      color: var(--muted);
+      font-size: 16px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 28px 0 0;
+    }
+    .tags span {
+      font-size: 12px;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      background: rgba(18, 20, 26, 0.7);
+      color: var(--muted);
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 32px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 13px 20px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #1a1208;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); background: var(--accent2); }
+    .btn.ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .btn.ghost:hover { border-color: rgba(244,241,234,0.28); }
+    .linkish {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .linkish:hover { color: var(--ink); }
+    .scroll {
+      margin-top: 56px;
+      width: 36px; height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      text-decoration: none;
+      animation: bob 2s ease-in-out infinite;
+    }
+
+    .proof {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      margin-bottom: 24px;
+    }
+    .proof > div {
+      background: var(--bg);
+      padding: 24px 20px;
+    }
+    .proof b {
+      display: block;
+      font-family: Syne, sans-serif;
+      font-size: 28px;
+      letter-spacing: -0.04em;
+    }
+    .proof span {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    section { padding: 88px 0; }
+    .sec-label {
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin: 0 0 12px;
+    }
+    h2 {
+      font-family: Syne, sans-serif;
+      font-weight: 700;
+      font-size: clamp(28px, 4.5vw, 44px);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin: 0 0 14px;
+      max-width: 16ch;
+    }
+    .sub { color: var(--muted); margin: 0 0 40px; max-width: 42em; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .about-grid p { color: var(--muted); margin: 0 0 14px; }
+    .portrait {
+      border: 1px solid var(--line);
+      background: var(--bg2);
+      padding: 14px;
+    }
+    .portrait img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      filter: grayscale(18%);
+    }
+    .portrait figcaption {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+    .service {
+      border: 1px solid var(--line);
+      background: rgba(18, 20, 26, 0.55);
+      padding: 28px;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .service:hover {
+      border-color: rgba(232, 149, 74, 0.35);
+      transform: translateY(-2px);
+    }
+    .service .num {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .service h3 {
+      font-family: Syne, sans-serif;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+      margin: 0 0 10px;
+    }
+    .service p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .work {
+      position: relative;
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: var(--bg2);
+      min-height: 280px;
+    }
+    .work img {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      object-fit: cover;
+      opacity: 0.72;
+      transition: transform 0.55s ease, opacity 0.3s ease;
+    }
+    .work:hover img { transform: scale(1.05); opacity: 0.9; }
+    .work .cap {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 22px;
+      background: linear-gradient(transparent, rgba(11,12,16,0.95));
+    }
+    .work .kind {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin: 0 0 6px;
+    }
+    .work h3 {
+      font-family: Syne, sans-serif;
+      font-size: 22px;
+      margin: 0 0 4px;
+      letter-spacing: -0.03em;
+    }
+    .work p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .contact-list { list-style: none; padding: 0; margin: 0; }
+    .contact-list li {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .contact-list strong {
+      display: block;
+      color: var(--ink);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .contact-list a { color: var(--ink); text-decoration: none; }
+    .contact-list a:hover { color: var(--accent); }
+    form {
+      border: 1px solid var(--line);
+      background: rgba(18, 20, 26, 0.55);
+      padding: 24px;
+      display: grid;
+      gap: 14px;
+    }
+    label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    input, textarea {
+      width: 100%;
+      margin-top: 6px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      padding: 12px 14px;
+      font: inherit;
+      border-radius: 0;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: rgba(232, 149, 74, 0.5);
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    button.btn {
+      border: 0;
+      cursor: pointer;
+      justify-content: center;
+      width: fit-content;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0 48px;
+      color: var(--muted);
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    @media (max-width: 900px) {
+      .nav-links a:not(.hire) { display: none; }
+      .proof { grid-template-columns: 1fr 1fr; }
+      .about-grid, .services, .work-grid, .contact { grid-template-columns: 1fr; }
+      h2 { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="page">
+    <div class="wrap">
+      <header class="nav">
+        <a class="logo" href="#">Web<span>Pixtel</span></a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#services">Services</a>
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <a class="hire" href="mailto:Alirazahassan026@gmail.com">Hire us</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <p class="status">Available for work · Lahore, Pakistan</p>
+        <h1>WebPixtel</h1>
+        <p class="role">Digital agency · AI · ecommerce · games · growth</p>
+        <p class="lead">We build and run AI automation &amp; SaaS, Shopify and WordPress stores, Unity 2D/3D games, Google Ads, and product configurators — from Lahore, for brands worldwide.</p>
+        <div class="tags" aria-label="What we deal in">
+          <span>AI automation</span>
+          <span>AI SaaS</span>
+          <span>AI web apps</span>
+          <span>Shopify</span>
+          <span>WordPress</span>
+          <span>Unity 2D / 3D</span>
+          <span>Google Ads</span>
+          <span>Configurators</span>
+        </div>
+        <div class="actions">
+          <a class="btn" href="#work">See the work →</a>
+          <a class="btn ghost" href="CV_AliRazaHassan_Shopify_WordPress.pdf">Web CV</a>
+          <a class="linkish" href="mailto:Alirazahassan026@gmail.com">Get in touch</a>
+        </div>
+        <a class="scroll" href="#about" aria-label="Scroll">↓</a>
+      </section>
+
+      <div class="proof" aria-label="Studio proof">
+        <div><b>2020–</b><span>Shipping live work</span></div>
+        <div><b>10M+</b><span>Game downloads</span></div>
+        <div><b>Fiverr L2</b><span>Agency seller</span></div>
+        <div><b>Remote</b><span>Worldwide clients</span></div>
+      </div>
+
+      <section id="about">
+        <p class="sec-label">01 — About</p>
+        <h2>An agency that ships, not pitches.</h2>
+        <div class="about-grid">
+          <div>
+            <p>WebPixtel is led by Ali Raza Hassan. We take on AI products and automations, ecommerce on Shopify and WordPress, Unity casual and multiplayer games, paid growth with Google Ads, and interactive configurators when a product needs to be configured in the browser.</p>
+            <p>Delivery is production-first: live URLs, live stores, live titles — the same habit we use on Game District casual games and client marketplaces.</p>
+            <p>Based in Lahore (PKT). English and Urdu. We can overlap EU mornings and US evenings.</p>
+          </div>
+          <figure class="portrait">
+            <img src="img/ali.png" alt="Ali Raza Hassan" />
+            <figcaption>Ali Raza Hassan · founder · Lahore</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="services">
+        <p class="sec-label">02 — Services</p>
+        <h2>What we deal in.</h2>
+        <p class="sub">Eight lanes. Pick one or stack them — same studio, one point of contact.</p>
+        <div class="services">
+          <article class="service">
+            <div class="num">01</div>
+            <h3>AI automation</h3>
+            <p>Chatbots, n8n / Make workflows, lead routing, and ops automation that cuts manual work across your stack.</p>
+          </article>
+          <article class="service">
+            <div class="num">02</div>
+            <h3>AI SaaS &amp; web apps</h3>
+            <p>AI-powered products and internal tools — dashboards, assistants, and SaaS features that ship to real users.</p>
+          </article>
+          <article class="service">
+            <div class="num">03</div>
+            <h3>Shopify</h3>
+            <p>Store builds and handling: themes, Liquid, collections, apps, checkout, shipping, and day-to-day ops.</p>
+          </article>
+          <article class="service">
+            <div class="num">04</div>
+            <h3>WordPress / WooCommerce</h3>
+            <p>Business sites, ecommerce, multi-vendor marketplaces, custom themes, SEO, and speed.</p>
+          </article>
+          <article class="service">
+            <div class="num">05</div>
+            <h3>Unity 2D &amp; 3D</h3>
+            <p>Casual, puzzle, and live-ops mobile games — C#, Photon / Fusion, Firebase, ads, IAP, Play Store shipping.</p>
+          </article>
+          <article class="service">
+            <div class="num">06</div>
+            <h3>Google Ads</h3>
+            <p>Search, Shopping, Display, and Performance Max with conversion tracking for local and ecommerce brands.</p>
+          </article>
+          <article class="service">
+            <div class="num">07</div>
+            <h3>Configurators</h3>
+            <p>Product and experience configurators — options, materials, and interactive previews for ecommerce and custom builds.</p>
+          </article>
+          <article class="service">
+            <div class="num">08</div>
+            <h3>Retain &amp; run</h3>
+            <p>Ongoing store handling, live-ops, ads optimisation, and automation maintenance after launch.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="work">
+        <p class="sec-label">03 — Selected work</p>
+        <h2>Things that shipped.</h2>
+        <p class="sub">Live marketplaces, published games, and paid media — every tile links out where it can.</p>
+        <div class="work-grid">
+          <a class="work" href="https://butterflydash.com/" target="_blank" rel="noopener">
+            <img src="img/butterfly.jpg" alt="Butterfly Dash marketplace" />
+            <div class="cap">
+              <p class="kind">WordPress · WooCommerce</p>
+              <h3>Butterfly Dash</h3>
+              <p>Multi-vendor food, gifting &amp; events marketplace</p>
+            </div>
+          </a>
+          <a class="work" href="https://fioridash.onrender.com/" target="_blank" rel="noopener">
+            <img src="img/fiore.jpg" alt="Fiore Dash marketplace" />
+            <div class="cap">
+              <p class="kind">Shopify · WordPress</p>
+              <h3>Fiore Dash</h3>
+              <p>Flowers, catering, cakes &amp; event services</p>
+            </div>
+          </a>
+          <a class="work" href="https://allaround-marketplace.onrender.com/" target="_blank" rel="noopener">
+            <img src="img/allaround.jpg" alt="AllAround marketplace" />
+            <div class="cap">
+              <p class="kind">Marketplace</p>
+              <h3>AllAround</h3>
+              <p>Rent, sell &amp; auction with trust features</p>
+            </div>
+          </a>
+          <a class="work" href="https://play.google.com/store/apps/details?id=com.hmbl.perfect.makeover.cleaning.asmr" target="_blank" rel="noopener">
+            <img src="img/game-cleaning.jpg" alt="Cleaning ASMR game" />
+            <div class="cap">
+              <p class="kind">Unity · 10M+ downloads</p>
+              <h3>Cleaning ASMR</h3>
+              <p>Live casual title · Game District</p>
+            </div>
+          </a>
+          <a class="work" href="img/ads-tito.jpg" target="_blank" rel="noopener">
+            <img src="img/ads.jpg" alt="Google Ads work" />
+            <div class="cap">
+              <p class="kind">Google Ads</p>
+              <h3>Paid search &amp; Shopping</h3>
+              <p>Local services, ecommerce, healthcare case work</p>
+            </div>
+          </a>
+          <a class="work" href="https://www.fiverr.com/users/alirazahassan1/portfolio" target="_blank" rel="noopener">
+            <img src="img/ai.jpg" alt="AI automation" />
+            <div class="cap">
+              <p class="kind">AI automation</p>
+              <h3>Chatbots &amp; workflows</h3>
+              <p>n8n / Make · agents · business process automation</p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section id="contact">
+        <p class="sec-label">04 — Contact</p>
+        <h2>Got a build that needs to ship?</h2>
+        <p class="sub">AI product, Shopify store, WordPress marketplace, Unity title, ads account, or a configurator — tell us what you are building.</p>
+        <div class="contact">
+          <ul class="contact-list">
+            <li>
+              <strong>Email</strong>
+              <a href="mailto:Alirazahassan026@gmail.com">Alirazahassan026@gmail.com</a>
+            </li>
+            <li>
+              <strong>Phone</strong>
+              <a href="tel:+923030132434">+92 303 0132434</a>
+            </li>
+            <li>
+              <strong>LinkedIn</strong>
+              <a href="https://www.linkedin.com/in/ali-raza-hassan-b051141b2" target="_blank" rel="noopener">ali-raza-hassan-b051141b2</a>
+            </li>
+            <li>
+              <strong>Fiverr</strong>
+              <a href="https://www.fiverr.com/users/alirazahassan1" target="_blank" rel="noopener">@alirazahassan1</a>
+            </li>
+            <li>
+              <strong>Location</strong>
+              Lahore, Pakistan · remote worldwide
+            </li>
+          </ul>
+          <form id="contact-form">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" required placeholder="Your name" />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required placeholder="you@company.com" />
+            </div>
+            <div>
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required placeholder="What are you building, and when does it need to be live?"></textarea>
+            </div>
+            <button class="btn" type="submit">Compose email</button>
+          </form>
+        </div>
+      </section>
+
+      <footer>
+        <div>© 2026 WebPixtel · Ali Raza Hassan</div>
+        <div>AI · Shopify · WordPress · Unity · Ads · Configurators</div>
+      </footer>
+    </div>
+  </div>
+  <script>
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = document.getElementById("name").value.trim();
+      var email = document.getElementById("email").value.trim();
+      var message = document.getElementById("message").value.trim();
+      var subject = encodeURIComponent("WebPixtel enquiry — " + name);
+      var body = encodeURIComponent("From: " + name + " <" + email + ">\n\n" + message);
+      window.location.href = "mailto:Alirazahassan026@gmail.com?subject=" + subject + "&body=" + body;
+    });
+  </script>
+</body>
+</html>
